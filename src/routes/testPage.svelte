@@ -17,8 +17,10 @@
 	// fetching data from JSON file and set data in store file
 	import { savedData } from '../store.js';
 	import { onMount } from 'svelte';
-	// const apiURL = '/static/data/question.json';
-	const apiURL = '../../static/data/question.json';
+
+	const apiURL = '/static/data/question.json';
+	// const apiURL = '../../static/data/question.json';
+	
 	let data = [];
 	onMount(async function () {
 		const response = await fetch(apiURL);
