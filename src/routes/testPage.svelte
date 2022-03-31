@@ -101,7 +101,7 @@
 
 <Header />
 
-<div class="row position-relative">
+<div class="row position-relative m-0">
 	<div class="col-2 p-0">
 		<!-- empty div to cover space  -->
 	</div>
@@ -140,9 +140,7 @@
 			{/each}
 		</div>
 	</div>
-	<div class="col-1 p-0">
-
-	</div>
+	
 </div>
 
 
