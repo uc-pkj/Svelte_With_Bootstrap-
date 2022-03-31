@@ -18,7 +18,7 @@
 	import { savedData } from '../store.js';
 	import { onMount } from 'svelte';
 
-	const apiURL = '/static/data/question.json';
+	const apiURL = '/data/question.json';
 	// const apiURL = '../../static/data/question.json';
 	
 	let data = [];
