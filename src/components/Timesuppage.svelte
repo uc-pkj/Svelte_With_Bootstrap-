@@ -1,26 +1,28 @@
-
-	<!-- // File name : Timesuppage.svelte
-	// Description : Call when times up
-	// Author : Pankaj Kumar
-	// Version : 1
-	// Package : svelte_items
-	// Created : 15 March 2022
-	// Updated by : Pankaj Kumar
-	// Updated Date : 30 March 2022  -->
-
 <script>
+	/**
+	 * File name : Timer.svelteTimesuppage.svelte
+	 * Description : Call when times up
+	 * Author : Pankaj Kumar
+	 * Version : 1
+	 * Package : svelte_items
+	 * Created : 15 March 2022
+	 * Updated by : Pankaj Kumar
+	 * Updated Date : 30 March 2022
+	 */
 	import { fade } from 'svelte/transition';
-
-	function overlay_click(e) {
+	function overlayClick(e) {
 		if ('close' in e.target.dataset) show = false;
 	}
-
 	export let show = false;
 </script>
 
 {#if show}
 	<div class="text-dark ">
-		<div class="d-flex justify-content-center align-items-center modal-overlay position-fixed start-0 top-0 end-0 bottom-0 " on:click={overlay_click} transition:fade={{ duration: 150 }}>
+		<div
+			class="d-flex justify-content-center align-items-center modal-overlay position-fixed start-0 top-0 end-0 bottom-0 "
+			on:click={overlayClick}
+			transition:fade={{ duration: 150 }}
+		>
 			<div class="modal-container position-relative bg-white rounded shadow">
 				<main class="my-4 mx-4">
 					<h2>TIME'S UP, Now click here to go to Result Page.</h2>
