@@ -1,13 +1,3 @@
-
-	<!-- // File name : [id].svelte
-	// Description : clickable questions on result page and goes to review page.
-	// Author : Pankaj Kumar
-	// Version : 1
-	// Package : svelte_items
-	// Created : 15 March 2022
-	// Updated by : Pankaj Kumar
-	// Updated Date : 30 March 2022  -->
-
 <script context="module">
 	export const load = ({ params }) => {
 		const id = params.id;
@@ -20,13 +10,23 @@
 </script>
 
 <script>
-	import Header from '../../components/Header.svelte'
+	/**
+	 * File name : [id].svelte
+	 * Description : clickable questions on result page and goes to review page.
+	 * Author : Pankaj Kumar
+	 * Version : 1
+	 * Package : svelte_items
+	 * Created : 15 March 2022
+	 * Updated by : Pankaj Kumar
+	 * Updated Date : 30 March 2022
+	 */
+	import Header from '../../components/Header.svelte';
 	import { savedData, answerCheckedByUser, reviewNavigator } from '../../store.js';
 	import Footer_ReviewPage from '../../components/Footer_ReviewPage.svelte';
 	import { onDestroy } from 'svelte';
 	export let id;
-	let pageNo = Number(id); 
-	let explanationAnswer; 
+	let pageNo = Number(id);
+	let explanationAnswer;
 	$: if (pageNo + 1) {
 		explanationAnswer = JSON.parse($savedData[pageNo].content_text).explanation;
 		let indexOfSeq = explanationAnswer.indexOf('<seq');
@@ -55,7 +55,6 @@
 			return (x = false);
 		});
 	});
-
 </script>
 
 <Header />
@@ -64,9 +63,9 @@
 		{#each $savedData as data, i}
 			{#if pageNo == i}
 				<div class="question">
-					<h4>
+					<h5>
 						Q{i + 1} . {JSON.parse(data.content_text).question}
-					</h4>
+					</h5>
 					<div class="mt-3">
 						<div class="">
 							{#each JSON.parse(data.content_text).answers as answers, j}
@@ -91,13 +90,11 @@
 							{/each}
 						</div>
 					</div>
+
 					{#each JSON.parse(data.content_text).answers as answersCorrect}
 						{#if answersCorrect.is_correct == 1}
-
-
 							<div class="bg-primary text-white rounded mt-5 mb-2 p-2">
-
-								<p>{@html explanationAnswer}</p>
+								<small>{@html explanationAnswer}</small>
 							</div>
 						{/if}
 					{/each}
@@ -105,11 +102,11 @@
 						{#if i + 1 == user.quesNo}
 							{#if user.userAns == '1'}
 								<div>
-									<h3 class="bg-success text-center text-white p-1 rounded">Correct</h3>
+									<h4 class="bg-success text-center text-white p-1 rounded">Correct</h4>
 								</div>
 							{:else}
-								<div >
-									<h3 class="text-center bg-danger text-white p-1 rounded">Incorrect</h3>
+								<div>
+									<h4 class="text-center bg-danger text-white p-1 rounded">Incorrect</h4>
 								</div>
 							{/if}
 						{/if}
@@ -136,5 +133,4 @@
 		width: 12px;
 		height: 12px;
 	}
-	
 </style>
