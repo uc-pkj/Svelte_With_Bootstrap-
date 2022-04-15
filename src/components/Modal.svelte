@@ -7,7 +7,7 @@
 	 * Package : svelte_items
 	 * Created : 15 March 2022
 	 * Updated by : Pankaj Kumar
-	 * Updated Date : 30 March 2022
+	 * Updated Date : 14 April 2022
 	 */
 	import { fade } from 'svelte/transition';
 	function overlayClick(e) {
@@ -20,7 +20,7 @@
 {#if show}
 	<div>
 		<div
-			class="modal_Overlay d-flex position-fixed top-0 bottom-0 start-0 end-0"
+			class=" d-flex position-fixed top-0 bottom-0 start-0 end-0 alert-dark" 
 			on:click={overlayClick}
 			transition:fade={{ duration: 150 }}
 		>
@@ -42,9 +42,3 @@
 		</div>
 	</div>
 {/if}
-
-<style>
-	.modal_Overlay {
-		background: rgba(0, 0, 0, 0.5);
-	}
-</style>

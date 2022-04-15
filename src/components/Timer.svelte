@@ -1,13 +1,13 @@
 <script>
 	/**
 	 * File name : Timer.svelte
-	 * Description : Contain timer function of Footer_TestPage
+	 * Description : Contain timer function of FooterTestPage
 	 * Author : Pankaj Kumar
 	 * Version : 1
 	 * Package : svelte_items
 	 * Created : 15 March 2022
 	 * Updated by : Pankaj Kumar
-	 * Updated Date : 30 March 2022
+	 * Updated Date : 14 April 2022
 	 */
 	import { onMount } from 'svelte';
 	export let CountDown = 120000; //give time in milliseconds
@@ -34,11 +34,5 @@
 
 <Timesuppage bind:show={timemodal_Show} />
 <main>
-	<p>{minutes < 10 ? '0' + minutes : minutes}:{seconds < 10 ? '0' + seconds : seconds}</p>
+	<p class="fs-6">{minutes < 10 ? '0' + minutes : minutes}:{seconds < 10 ? '0' + seconds : seconds}</p>
 </main>
-
-<style>
-	p {
-		font-size: 18px;
-	}
-</style>

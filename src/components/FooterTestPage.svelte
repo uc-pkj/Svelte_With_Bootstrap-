@@ -1,13 +1,13 @@
 <script>
 	/**
-	 * File name : Footer_TestPage.svelte
+	 * File name : FooterTestPage.svelte
 	 * Description : Contain test page footer
 	 * Author : Pankaj Kumar
 	 * Version : 1
 	 * Package : svelte_items
 	 * Created : 15 March 2022
 	 * Updated by : Pankaj Kumar
-	 * Updated Date : 30 March 2022
+	 * Updated Date : 14 April 2022
 	 */
 
 	// importing components
@@ -28,16 +28,11 @@
 		dispatch('decrement');
 	};
 	export let count;
-	// @ts-ignore
-	import { clickOutside } from '../function/clickOutside.js';
-	function handleClickOutside(event) {
-		sidebar_Show = false;
-	}
 	// transfer data from navigation bar to test page
 	const clickedQuestionNo = (event) => {
 		dispatch('changeQuestion', event.detail);
 	};
-	export let currentData;
+	export let current_data;
 	//import model file (on click on end test dialogue box will appear)
 	import Modal from './Modal.svelte';
 	let modal_Show = false;
@@ -60,7 +55,7 @@
 				</div>
 
 				<!-- list & preivous button  -->
-				<div use:clickOutside on:click-outside={handleClickOutside} class="d-flex">
+				<div   class="d-flex">
 					<!-- svelte-ignore a11y-accesskey -->
 					<button
 						class="btn btn-primary m-2"
@@ -73,7 +68,7 @@
 					<button
 						class="btn btn-primary m-2"
 						on:click={decreaseQuestionValue}
-						disabled={currentData + 1 <= 1}
+						disabled={current_data + 1 <= 1}
 						accesskey="p">Previous</button
 					>
 				</div>
@@ -89,7 +84,7 @@
 					<button
 						class="btn btn-primary"
 						on:click={increaseQuestionValue}
-						disabled={currentData + 1 >= 11}
+						disabled={current_data + 1 >= 11}
 						accesskey="n">Next</button
 					>
 

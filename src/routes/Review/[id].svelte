@@ -18,24 +18,24 @@
 	 * Package : svelte_items
 	 * Created : 15 March 2022
 	 * Updated by : Pankaj Kumar
-	 * Updated Date : 30 March 2022
+	 * Updated Date : 14 April 2022
 	 */
 	import Header from '../../components/Header.svelte';
 	import { savedData, answerCheckedByUser, reviewNavigator } from '../../store.js';
-	import Footer_ReviewPage from '../../components/Footer_ReviewPage.svelte';
+	import FooterReviewPage from '../../components/FooterReviewPage.svelte';
 	import { onDestroy } from 'svelte';
 	export let id;
 	let pageNo = Number(id);
-	let explanationAnswer;
+	let explanation_answer;
 	$: if (pageNo + 1) {
-		explanationAnswer = JSON.parse($savedData[pageNo].content_text).explanation;
-		let indexOfSeq = explanationAnswer.indexOf('<seq');
+		explanation_answer = JSON.parse($savedData[pageNo].content_text).explanation;
+		let indexOfSeq = explanation_answer.indexOf('<seq');
 		while (indexOfSeq > -1) {
-			let str1 = explanationAnswer.substr(indexOfSeq, 14);
-			let currectAnswer = explanationAnswer.charAt(indexOfSeq + 9);
+			let str1 = explanation_answer.substr(indexOfSeq, 14);
+			let currectAnswer = explanation_answer.charAt(indexOfSeq + 9);
 			currectAnswer = currectAnswer.toUpperCase();
-			explanationAnswer = explanationAnswer.replace(str1, currectAnswer);
-			indexOfSeq = explanationAnswer.indexOf('<seq');
+			explanation_answer = explanation_answer.replace(str1, currectAnswer);
+			indexOfSeq = explanation_answer.indexOf('<seq');
 		}
 	}
 	// updating the question from sidebar list question
@@ -51,10 +51,10 @@
 		pageNo = pageNo - 1;
 	};
 	onDestroy(() => {
-		reviewNavigator.update((x) => {
-			return (x = false);
-		});
+		reviewNavigator.set(false);
 	});
+
+
 </script>
 
 <Header />
@@ -66,35 +66,30 @@
 					<h5>
 						Q{i + 1} . {JSON.parse(data.content_text).question}
 					</h5>
-					<div class="mt-3">
-						<div class="">
-							{#each JSON.parse(data.content_text).answers as answers, j}
+					<div class="d-flex flex-column mt-4 border p-2">
+						{#each JSON.parse(data.content_text).answers as answers, j}
+							<div class="d-flex">
 								{#if answers.is_correct == 1}
-									<label class=" d-flex align-items-center">
-										<input
-											type="radio"
-											class="custom_InputButton mx-4 bg-success rounded-circle border"
-											value={j}
-											name="radio"
-											bind:group={answers}
-											disabled
-										/>
+									<p class="h6 my-auto">{String.fromCharCode(65 + j)}</p>
+									<label class="w-100 m-2">
+										<input type="radio" checked />
 										{@html answers.answer}
 									</label>
 								{:else}
-									<label class=" d-flex align-items-center">
-										<input type="radio" name="radio" class="mx-4" disabled />
+									<p class="h6 my-auto">{String.fromCharCode(65 + j)}</p>
+									<label class="w-100 m-2">
+										<input type="radio" disabled />
 										{@html answers.answer}
 									</label>
 								{/if}
-							{/each}
-						</div>
+							</div>
+						{/each}
 					</div>
 
 					{#each JSON.parse(data.content_text).answers as answersCorrect}
 						{#if answersCorrect.is_correct == 1}
 							<div class="bg-primary text-white rounded mt-5 mb-2 p-2">
-								<small>{@html explanationAnswer}</small>
+								<small>{@html explanation_answer}</small>
 							</div>
 						{/if}
 					{/each}
@@ -117,20 +112,11 @@
 	</div>
 </div>
 <div class="position-fixed bottom-0 w-50 end-0 m-2">
-	<Footer_ReviewPage
-		currentData={pageNo}
+	<FooterReviewPage
+		current_data={pageNo}
 		on:changques={upDateQuestionPage}
 		on:increment={incrementPage}
 		on:decrement={decrementPage}
 		count={pageNo + 1}
 	/>
 </div>
-
-<style>
-	.custom_InputButton {
-		box-shadow: 0 0 0 1px #392;
-		appearance: none;
-		width: 12px;
-		height: 12px;
-	}
-</style>

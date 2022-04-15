@@ -7,7 +7,7 @@
 	 * Package : svelte_items
 	 * Created : 15 March 2022
 	 * Updated by : Pankaj Kumar
-	 * Updated Date : 30 March 2022
+	 * Updated Date : 14 April 2022
 	 */
 	import Header from '../components/Header.svelte';
 	import { onMount } from 'svelte';
@@ -15,8 +15,8 @@
 	let correct = 0;
 	let incorrect = 0;
 	let percentage = 0;
-	let actualCorrectArray = [];
-	let answerChoosebyUserArray = [];
+	let actual_correct_array = [];
+	let answer_choose_by_user_array = [];
 	let option = ['A', 'B', 'C', 'D']; // options for user to select
 	$: for (let i = 0; i < $savedData.length; i++) {
 		let correctIndex = 0;
@@ -29,7 +29,7 @@
 		} else {
 			correctIndex = null;
 		}
-		answerChoosebyUserArray[i] = correctIndex;
+		answer_choose_by_user_array[i] = correctIndex;
 	}
 	$: for (let i = 0; i < $savedData.length; i++) {
 		let actualCorrect = 0;
@@ -38,7 +38,7 @@
 				actualCorrect = j;
 			}
 		}
-		actualCorrectArray[i] = actualCorrect;
+		actual_correct_array[i] = actualCorrect;
 	}
 	onMount(() => {
 		$answerCheckedByUser.sort(function (a, b) {
@@ -81,74 +81,52 @@
 <main>
 	<div class="container my-4 d-flex align-items-center flex-column">
 		<div
-			class="row d-flex justify-content-around align-items-center border border-secondary border-4 rounded m-1 p-1 w-75"
-		>
+			class="row d-flex justify-content-around align-items-center border border-secondary border-4 rounded m-1 p-1 w-75">
 			<div
-				class="col  border border-2 border-danger rounded text-center text-uppercase p-1 m-1 d-flex justify-content-center flex-column "
-			>
-				<h5 class="">Total Ques</h5>
+				class="col  border border-2 border-danger rounded text-center text-uppercase p-1 m-1 d-flex justify-content-center flex-column ">
+				<h5 class=" text-nowrap">Total Ques</h5>
 				<h2>11</h2>
 			</div>
 			<div
-				class="col  border border-2 border-danger rounded text-center text-uppercase p-1 m-1 d-flex justify-content-center flex-column "
-			>
+				class="col  border border-2 border-danger rounded text-center text-uppercase p-1 m-1 d-flex justify-content-center flex-column ">
 				<h5>Attempted</h5>
 				<h2>{data2.length}</h2>
 			</div>
 			<div
-				class="col  border border-2 border-danger rounded text-center text-uppercase p-1 m-1 d-flex justify-content-center flex-column "
-			>
+				class="col  border border-2 border-danger rounded text-center text-uppercase p-1 m-1 d-flex justify-content-center flex-column ">
 				<h5>Unattempted</h5>
 				<h2>{11 - $answerCheckedByUser.length}</h2>
 			</div>
 			<div
-				class="col  border border-2 border-danger rounded text-center text-uppercase p-1 m-1 d-flex justify-content-center flex-column "
-			>
+				class="col  border border-2 border-danger rounded text-center text-uppercase p-1 m-1 d-flex justify-content-center flex-column ">
 				<h5>Correct</h5>
 				<h2>{correct}</h2>
 			</div>
 			<div
-				class="col  border border-2 border-danger rounded text-center text-uppercase p-1 m-1 d-flex justify-content-center flex-column "
-			>
+				class="col  border border-2 border-danger rounded text-center text-uppercase p-1 m-1 d-flex justify-content-center flex-column ">
 				<h5>Incorrect</h5>
 				<h2>{incorrect}</h2>
 			</div>
 			<div
-				class="col  border border-2 border-danger rounded text-center text-uppercase p-1 m-1 d-flex justify-content-center flex-column "
-			>
+				class="col  border border-2 border-danger rounded text-center text-uppercase p-1 m-1 d-flex justify-content-center flex-column ">
 				<h5>Percentage</h5>
 				<h2>{percentage} %</h2>
 			</div>
 		</div>
 
-		<div class="d-flex flex-row justify-content-around w-50 m-2">
-			<h6 class="mb-3">
-				(Attempted + Correct) : <span
-					class=" border border-dark border-2 d-inline-block bg-success"
-					style=" width:30px;height:20px"
-				/>
-			</h6>
-			<h6 class="mb-3">
-				(Attempted + InCorrect) : <span
-					class=" border border-dark border-2 d-inline-block bg-danger"
-					style=" width:30px;height:20px"
-				/>
-			</h6>
-			<h6 class="mb-3">
-				(Correct Answers) : <span
-					class=" border border-dark border-2 d-inline-block bg-info"
-					style=" width:30px;height:20px"
-				/>
-			</h6>
+		<div class="d-flex flex-column   m-2 ">
+			<h6 class="mb-3 text-nowrap bg-success p-2 text-white">(Attempted + Correct) : </h6>
+			<h6 class="mb-3 text-nowrap bg-danger p-2 text-white">(Attempted + InCorrect) :</h6>
+			<h6 class="mb-3 text-nowrap bg-info p-2 text-white">(Correct Answers) :</h6>
 		</div>
 
 		<div class=" mx-5 my-auto w-75 border border-dark border-2 rounded p-2">
 			{#each $savedData as item, i}
-				<div class="d-flex row">
+				<div class="d-flex flex-md-column flex-lg-column flex-column flex-xl-row">
 					<!-- for questions  -->
 					<div class="col-9  ">
 						<!-- svelte-ignore a11y-invalid-attribute -->
-						<p id="topques" class="fw-bold">
+						<p class="fw-bold">
 							<a
 								class="text-decoration-none text-dark d-block text-nowrap overflow-hidden text-truncate"
 								href={`Review/${i}`}
@@ -158,32 +136,25 @@
 					</div>
 
 					<!-- for answers  -->
-					<div class="col-3 ">
+					<div class="col-3 d-flex">
 						<!-- show all answers  -->
-						<div class="row ">
-							<div class="col d-flex p-0">
+							<div class="col d-flex p-0 mb-1">
 								{#each option as optionData, j}
-									<div
-										class="{`${
-											actualCorrectArray[i] == j
-										}`} border col w-25 text-center align-middle "
-										class:selected={actualCorrectArray[i] != answerChoosebyUserArray[i] &&
-										answerChoosebyUserArray[i] == j
-											? true
-											: false}
-									>
+									<div 
+									class="{`${actual_correct_array[i] == j}`} border col w-25 text-center align-middle " 
+									class:selected={actual_correct_array[i] != answer_choose_by_user_array[i] && answer_choose_by_user_array[i] == j ? true : false}>
 										<p class="m-0 p-1">{optionData}</p>
 									</div>
 								{/each}
 							</div>
 							<!-- user review about questions  -->
-							<div class="col p text-center">
+							<div class=" p text-center ms-1 p-1">
 								{#each $answerCheckedByUser as selectQue}
 									{#if i + 1 == selectQue.quesNo}
 										{#if selectQue.userAns == 0}
 											<p class="m-0 p-0">INCORRECT</p>
 										{:else}
-											<p class="bg-success text-light align-items-center m-0 p-0">CORRECT</p>
+											<p class="bg-success text-light align-items-center m-0 p-1">CORRECT</p>
 										{/if}
 									{/if}
 								{/each}
@@ -192,7 +163,6 @@
 										<p class="m-0 p-0">UNATTEMPTED</p>
 									{/if}
 								{/each}
-							</div>
 						</div>
 					</div>
 				</div>
@@ -209,9 +179,6 @@
 </div>
 
 <style>
-	#topques:hover {
-		text-decoration: underline;
-	}
 
 	.true {
 		background-color: lightblue;
